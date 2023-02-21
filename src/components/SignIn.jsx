@@ -5,6 +5,7 @@ import { UserContext } from "../context/UserContextProvider";
 import { StyledButton, StyledButtonWithIcon } from "./utility/StyledButtons";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const {
@@ -18,6 +19,7 @@ function SignIn() {
   } = useContext(UserContext);
   const [sysMsg, setSysMsg] = useState(null);
   const [passcode, setPasscode] = useState(null);
+  const navigate = useNavigate();
 
   //display msg
   useEffect(() => {
@@ -37,7 +39,14 @@ function SignIn() {
   const signInWithGoogle = async () => {
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
-    const { newuser } = await firebase.auth().signInWithPopup(provider);
+    const { newUser, isNewUser } = await firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        const newUser = result.user;
+        const isNewUser = result.additionalUserInfo.isNewUser;
+        return { newUser, isNewUser };
+      });
 
     const userIdToken = await firebase
       .auth()
@@ -45,17 +54,13 @@ function SignIn() {
       .then(function (idToken) {
         if (idToken) {
           setUserIdToken(idToken);
+          navigate("/profile");
           return idToken;
         }
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    if (newuser) {
-      setUser(newuser);
-      updateUserBackEnd(user.uid, user.displayName, user.email, userIdToken);
-    }
   };
 
   //display name change
@@ -69,12 +74,7 @@ function SignIn() {
         const currentUser = firebase.auth().currentUser;
         setUser(currentUser);
 
-        updateUserBackEnd(
-          currentUser.uid,
-          newDisplayName,
-          currentUser.email,
-          userIdToken
-        );
+        updateUserBackEnd(currentUser.uid, newDisplayName, currentUser.email);
 
         setNewDisplayName(newDisplayName);
       } else {
@@ -97,7 +97,7 @@ function SignIn() {
     }
   };
 
-  const updateUserToAdminBackEnd = async (passcode) => {
+  const updateUserToAdminBackEnd = async () => {
     const uid = user.uid;
     try {
       const response = await axios.patch(
@@ -124,6 +124,7 @@ function SignIn() {
   };
 
   const updateUserBackEnd = async (uid, newDisplayName, email) => {
+    console.log(uid, newDisplayName, email, userIdToken);
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}/users/${uid}`,
