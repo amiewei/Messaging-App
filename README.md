@@ -1,37 +1,3 @@
-# template-vite-react-tailwind-v3
+# Client App: React, Vite and Tailwind
 
-- **template of:** vite + react
-- **tailwindcss:** v3.x
-
-## Started
-
-```bash
-yarn
-# or `npm install`
-```
-
----
-
-## Develop
-
-```bash
-yarn dev
-# or `npm run dev`
-```
-
----
-
-## Build
-
-```bash
-yarn build
-# or `npm run build`
-```
-
----
-
-<p align="center">
-<img src="./powered-by-vitawind-bright.png">
-</p>
-
-backend is nodejs / express app with mongodb atlas
+# using template-vite-react-tailwind-v3
