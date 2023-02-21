@@ -1,11 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import RouteSwitch from "./RouteSwitch";
+import { UserContextProvider } from "./context/UserContextProvider";
+import { MessagingContextProvider } from "./context/MessagingContextProvider";
 import "./index.css";
-import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <UserContextProvider>
+      <MessagingContextProvider>
+        <RouteSwitch />
+      </MessagingContextProvider>
+    </UserContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

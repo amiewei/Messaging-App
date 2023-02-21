@@ -117,3 +117,9 @@ dist
 .yarn/install-state.gz
 .pnp.*
 yarn.lock
+
+# other
+TODO.md
+node_modules
+.env
+firebase.config.js

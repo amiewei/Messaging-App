@@ -8,5 +8,7 @@
   },
   "editor.quickSuggestions": {
     "strings": true
-  }
+  },
+  "css.customData": [".vscode/css_custom_data.json"],
+  "css.lint.unknownAtRules": "ignore"
 }
