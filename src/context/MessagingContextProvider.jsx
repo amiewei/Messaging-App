@@ -16,7 +16,6 @@ export const MessagingContextProvider = ({ children }) => {
       `${import.meta.env.VITE_BACKEND_URL}/api/messages`
     );
 
-    console.log(response);
     if (response.status === 201) {
       setMessages(response.data);
     } else {
@@ -25,38 +24,49 @@ export const MessagingContextProvider = ({ children }) => {
   };
 
   const addMessage = async (uid, message) => {
-    return await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/users/api/message/add`,
-      { uid, message, useridtoken: userIdToken }
-    );
+    try {
+      return await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/users/api/message/add`,
+        { uid, message, useridtoken: userIdToken }
+      );
+    } catch (error) {
+      return error.response;
+    }
   };
 
   const deleteAllMessagesByUser = async (uid) => {
-    console.log(userIdToken);
-    return await axios.delete(
-      `${import.meta.env.VITE_BACKEND_URL}/users/api/message/delete`,
-      {
-        headers: {
-          uid: uid,
-          method: "all",
-          useridtoken: userIdToken,
-        },
-      }
-    );
+    try {
+      return await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/users/api/message/delete`,
+        {
+          headers: {
+            uid: uid,
+            method: "all",
+            useridtoken: userIdToken,
+          },
+        }
+      );
+    } catch (error) {
+      return error.response;
+    }
   };
 
   const deleteIndividualMessage = async (messageId, uid) => {
-    return await axios.delete(
-      `${import.meta.env.VITE_BACKEND_URL}/users/api/message/delete`,
-      {
-        headers: {
-          messageid: messageId,
-          uid: uid,
-          method: "individual",
-          useridtoken: userIdToken,
-        },
-      }
-    );
+    try {
+      return await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/users/api/message/delete`,
+        {
+          headers: {
+            messageid: messageId,
+            uid: uid,
+            method: "individual",
+            useridtoken: userIdToken,
+          },
+        }
+      );
+    } catch (error) {
+      return error.response;
+    }
   };
 
   return (

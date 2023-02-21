@@ -60,6 +60,7 @@ function SignIn() {
       })
       .catch(function (error) {
         console.log(error);
+        navigate("/");
       });
   };
 
@@ -124,7 +125,6 @@ function SignIn() {
   };
 
   const updateUserBackEnd = async (uid, newDisplayName, email) => {
-    console.log(uid, newDisplayName, email, userIdToken);
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}/users/${uid}`,

@@ -51,7 +51,7 @@ function Messaging() {
           setSysMsg("sent");
           return;
         }
-        throw Error(error.response.data.error);
+        throw Error(response.data.error);
       } else {
         throw Error("Chat Message Cannot Be Blank");
       }
@@ -62,18 +62,14 @@ function Messaging() {
 
   const handleDeleteAllUserMsg = async () => {
     try {
-      console.log("handleDeleteAllUserMSg");
       const response = await deleteAllMessagesByUser(user.uid);
-      console.log("response: ");
-      console.log(response);
 
       if (response.status === 201 || response.status === 200) {
         setSysMsg("Messages Deleted");
         return;
       }
 
-      console.log(error.response.data.error);
-      throw Error(error.response.data.error);
+      throw Error(response.data.error);
     } catch (error) {
       setSysMsg(error.message);
     }
@@ -87,7 +83,7 @@ function Messaging() {
         setSysMsg("Messages Deleted");
         return;
       }
-      throw Error(error.response.data.error);
+      throw Error(response.data.error);
     } catch (error) {
       setSysMsg(error.message);
     }
