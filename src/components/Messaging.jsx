@@ -29,7 +29,6 @@ function Messaging() {
     try {
       getMessage();
       if (sysMsg) {
-        console.log(sysMsg);
         const timer = setTimeout(() => {
           setSysMsg(null);
         }, 1500); // 1.5 second delay

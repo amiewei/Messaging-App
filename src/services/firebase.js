@@ -2,11 +2,9 @@ import { getAnalytics } from "firebase/analytics";
 import "firebase/compat/auth";
 import "firebase/auth";
 import firebase from "firebase/compat/app";
-// import firebaseConfig from "../../firebase.config.js";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
+//use Firebase security rules for security
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "express-mdn.firebaseapp.com",

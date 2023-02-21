@@ -18,7 +18,6 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  console.log("navbar ");
   const { user, setUser, newDisplayName } = useContext(UserContext);
   const [nav, setNav] = useState(navigation);
   const navigate = useNavigate();
@@ -28,22 +27,14 @@ export default function Navbar() {
     setNav([...navigation]);
   }, [window.location.pathname]);
 
-  useEffect(() => {
-    if (user) {
-      console.log("Navbar 2nd use effect" + newDisplayName);
-    }
-  }, [newDisplayName]);
-
   const updateNavigation = (navigation) => {
     const pathName = window.location.pathname;
 
     // loop through the navigation array
     for (let i = 0; i < navigation.length; i++) {
       if (pathName.includes(navigation[i].to.toLowerCase())) {
-        console.log(window.location.pathname);
         // if the URL path contains the href value, set current to true
         navigation[i].current = true;
-        console.log(navigation[i].current);
       } else {
         // otherwise, set current to false
         navigation[i].current = false;
@@ -58,7 +49,6 @@ export default function Navbar() {
       .signOut()
       .then(() => {
         setUser(null);
-        console.log("log out");
         navigate("/");
         location.reload();
         return;
@@ -206,77 +196,3 @@ export default function Navbar() {
     </UserContext.Provider>
   );
 }
-
-// const Navbar = () => {
-//   console.log("navbar ");
-//   const { user, setUser } = useContext(UserContext);
-//   const [newDisplayName, setNewDisplayName] = useState("");
-//   const [sysMsg, setSysMsg] = useState(null);
-
-//   // const darkMode = () => {
-//   //   const element = document.body;
-//   //   element.classList.toggle("dark-mode");
-//   //   const btnDarkMode = document.querySelector(".btn-dark-mode");
-
-//   //   if (element.classList.contains("dark-mode")) {
-//   //     btnDarkMode.textContent = "☀️";
-//   //     btnDarkMode.classList.remove("dark-mode");
-//   //   } else {
-//   //     btnDarkMode.textContent = "🌙";
-//   //     btnDarkMode.classList.add("dark-mode");
-//   //   }
-//   // };
-
-//   const handleLogout = () => {
-//     firebase
-//       .auth()
-//       .signOut()
-//       .then(() => {
-//         setUser(null);
-//       })
-//       .catch((error) => {
-//         console.log("Error logging out:", error);
-//       });
-//   };
-
-//   const displayDarkModeBtn = () => {
-//     const btnDarkMode = document.querySelector(".btn-dark-mode");
-//     console.log("test");
-//     console.dir(btnDarkMode);
-//   };
-
-//   displayDarkModeBtn();
-
-//   return (
-//     <UserContext.Provider value={user}>
-//       {user ? (
-//         <nav className="nav-bar">
-//           <div className="logo">
-//             <Link to="/">
-//               {" "}
-//               <h1>🦜🎙️</h1>
-//             </Link>
-//           </div>
-//           <div className="nav-link">
-//             <Link to="/">Home</Link>
-//             <Link to="/messaging">Messaging</Link>
-//             {/* <button className="btn-dark-mode dark-mode" onClick={darkMode}>
-//           🌙
-//         </button> */}
-//             <div>
-//               <StyledButtonWithIcon
-//                 onClick={handleLogout}
-//                 width="max-w-sm"
-//                 color="teal"
-//               >
-//                 Sign Out
-//               </StyledButtonWithIcon>
-//             </div>
-//           </div>
-//         </nav>
-//       ) : null}
-//     </UserContext.Provider>
-//   );
-// };
-
-// export default Navbar;

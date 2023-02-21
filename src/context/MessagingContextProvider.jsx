@@ -9,17 +9,14 @@ export const useMessagingContext = () => useContext(MessagingContext);
 export const MessagingContextProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
   const { userIdToken } = useContext(UserContext);
-  // console.log(userIdToken);
 
   const getMessage = async () => {
-    console.log("get msg");
     const response = await axios.get(
       `${import.meta.env.VITE_BACKEND_URL}:${
         import.meta.env.VITE_BACKEND_PORT
       }/api/messages`
     );
 
-    console.log(response);
     if (response.status === 201) {
       setMessages(response.data);
     } else {
@@ -37,7 +34,6 @@ export const MessagingContextProvider = ({ children }) => {
   };
 
   const deleteAllMessagesByUser = async (uid) => {
-    console.log("messaging context provider - deleteallMessage");
     return await axios.delete(
       `${import.meta.env.VITE_BACKEND_URL}:${
         import.meta.env.VITE_BACKEND_PORT

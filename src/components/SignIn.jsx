@@ -19,43 +19,31 @@ function SignIn() {
   const [sysMsg, setSysMsg] = useState(null);
   const [passcode, setPasscode] = useState(null);
 
-  console.log(user);
-  console.log("rendering");
   //display msg
   useEffect(() => {
-    console.log("useeffect- user profile");
-    console.log(user);
     try {
-      console.log("sysmsg: " + sysMsg);
       if (sysMsg) {
-        console.log(sysMsg);
         const timer = setTimeout(() => {
           setSysMsg(null);
         }, 1500); // 1.5 second delay
         return () => clearTimeout(timer);
       }
     } catch (error) {
-      console.log("Error getting messages:", error);
       setSysMsg(error.message);
     }
   }, [sysMsg]);
 
   //initial login
   const signInWithGoogle = async () => {
-    console.log("sign in with google");
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
     const { newuser } = await firebase.auth().signInWithPopup(provider);
-
-    console.log(newuser);
 
     const userIdToken = await firebase
       .auth()
       .currentUser.getIdToken(/* forceRefresh */ true)
       .then(function (idToken) {
         if (idToken) {
-          console.log("firebase idtoken for user");
-          console.log(idToken);
           setUserIdToken(idToken);
           return idToken;
         }
@@ -93,22 +81,18 @@ function SignIn() {
         throw Error("Display Name is Required");
       }
     } catch (error) {
-      console.log("Error updating display name:", error);
       setSysMsg(error.message);
     }
   };
 
   const handleAdminPasscode = async () => {
-    console.log("passcode is: " + passcode);
     try {
       if (passcode === "admin") {
-        console.log("passcode match");
         updateUserToAdminBackEnd(passcode);
       } else {
         throw Error("Incorrect Passcode");
       }
     } catch (error) {
-      console.log("Error updating display name:", error);
       setSysMsg(error.message);
     }
   };
@@ -116,7 +100,6 @@ function SignIn() {
   const updateUserToAdminBackEnd = async (passcode) => {
     const uid = user.uid;
     try {
-      console.log(passcode, userIdToken);
       const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}:${
           import.meta.env.VITE_BACKEND_PORT
@@ -160,7 +143,6 @@ function SignIn() {
           },
         }
       );
-      console.log(response);
       if (response.status === 200 || response.status === 201) {
         setSysMsg("Display name updated!");
         return;
