@@ -6,8 +6,6 @@ import SignIn from "./components/SignIn";
 import App from "./App";
 
 const RouteSwitch = () => {
-  console.log("route switch");
-
   return (
     //browserRouter to wrap everything
     <BrowserRouter>

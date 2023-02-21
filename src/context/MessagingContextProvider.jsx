@@ -11,6 +11,11 @@ export const MessagingContextProvider = ({ children }) => {
   const { userIdToken } = useContext(UserContext);
 
   const getMessage = async () => {
+    console.log(
+      `${import.meta.env.VITE_BACKEND_URL}:${
+        import.meta.env.VITE_BACKEND_PORT
+      }/api/messages`
+    );
     const response = await axios.get(
       `${import.meta.env.VITE_BACKEND_URL}:${
         import.meta.env.VITE_BACKEND_PORT
