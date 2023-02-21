@@ -101,8 +101,7 @@ function SignIn() {
     const uid = user.uid;
     try {
       const response = await axios.patch(
-        `${import.meta.env.VITE_BACKEND_URL}
-        /users/${uid}`,
+        `${import.meta.env.VITE_BACKEND_URL}/users/${uid}`,
         {
           isAdmin: true,
           displayName: user.displayName,
@@ -127,8 +126,7 @@ function SignIn() {
   const updateUserBackEnd = async (uid, newDisplayName, email) => {
     try {
       const response = await axios.patch(
-        `${import.meta.env.VITE_BACKEND_URL}
-        /users/${uid}`,
+        `${import.meta.env.VITE_BACKEND_URL}/users/${uid}`,
         {
           displayName: newDisplayName,
           email: email,
