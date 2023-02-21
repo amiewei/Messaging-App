@@ -102,7 +102,7 @@ function SignIn() {
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}
-        }/users/${uid}`,
+        /users/${uid}`,
         {
           isAdmin: true,
           displayName: user.displayName,
@@ -128,7 +128,7 @@ function SignIn() {
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}
-        }/users/${uid}`,
+        /users/${uid}`,
         {
           displayName: newDisplayName,
           email: email,
