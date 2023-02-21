@@ -16,6 +16,7 @@ export const MessagingContextProvider = ({ children }) => {
       `${import.meta.env.VITE_BACKEND_URL}/api/messages`
     );
 
+    console.log(response);
     if (response.status === 201) {
       setMessages(response.data);
     } else {
@@ -31,6 +32,7 @@ export const MessagingContextProvider = ({ children }) => {
   };
 
   const deleteAllMessagesByUser = async (uid) => {
+    console.log(userIdToken);
     return await axios.delete(
       `${import.meta.env.VITE_BACKEND_URL}/users/api/message/delete`,
       {

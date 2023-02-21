@@ -14,8 +14,9 @@ export default ({ mode }) => {
       port: parseInt(process.env.VITE_PORT),
       proxy: {
         "/api": {
-          target: `${process.env.VITE_BACKEND_URL}:${process.env.VITE_BACKEND_PORT}`,
+          target: `${process.env.VITE_BACKEND_URL}`,
           changeOrigin: true,
+          // host: "0.0.0.0",
         },
       },
     },
