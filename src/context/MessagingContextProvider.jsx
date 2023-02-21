@@ -12,13 +12,11 @@ export const MessagingContextProvider = ({ children }) => {
 
   const getMessage = async () => {
     console.log(
-      `${import.meta.env.VITE_BACKEND_URL}:${
-        import.meta.env.VITE_BACKEND_PORT
+      `${import.meta.env.VITE_BACKEND_URL}
       }/api/messages`
     );
     const response = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}:${
-        import.meta.env.VITE_BACKEND_PORT
+      `${import.meta.env.VITE_BACKEND_URL}
       }/api/messages`
     );
 
@@ -31,8 +29,7 @@ export const MessagingContextProvider = ({ children }) => {
 
   const addMessage = async (uid, message) => {
     return await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}:${
-        import.meta.env.VITE_BACKEND_PORT
+      `${import.meta.env.VITE_BACKEND_URL}
       }/users/api/message/add`,
       { uid, message, useridtoken: userIdToken }
     );
@@ -40,8 +37,7 @@ export const MessagingContextProvider = ({ children }) => {
 
   const deleteAllMessagesByUser = async (uid) => {
     return await axios.delete(
-      `${import.meta.env.VITE_BACKEND_URL}:${
-        import.meta.env.VITE_BACKEND_PORT
+      `${import.meta.env.VITE_BACKEND_URL}
       }/users/api/message/delete`,
       {
         headers: {
@@ -55,8 +51,7 @@ export const MessagingContextProvider = ({ children }) => {
 
   const deleteIndividualMessage = async (messageId, uid) => {
     return await axios.delete(
-      `${import.meta.env.VITE_BACKEND_URL}:${
-        import.meta.env.VITE_BACKEND_PORT
+      `${import.meta.env.VITE_BACKEND_URL}
       }/users/api/message/delete`,
       {
         headers: {
