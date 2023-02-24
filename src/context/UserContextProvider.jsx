@@ -17,7 +17,9 @@ export const UserContextProvider = ({ children }) => {
         setUser(firebaseUser);
       }
     });
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, [user]);
 
   useEffect(() => {

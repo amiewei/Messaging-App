@@ -48,13 +48,13 @@ function SignIn() {
         return { newUser, isNewUser };
       });
 
-    const userIdToken = await firebase
+    const idToken = await firebase
       .auth()
       .currentUser.getIdToken(/* forceRefresh */ true)
       .then(function (idToken) {
         if (idToken) {
           setUserIdToken(idToken);
-          navigate("/profile");
+          // navigate("/profile");
           return idToken;
         }
       })
@@ -62,6 +62,14 @@ function SignIn() {
         console.log(error);
         navigate("/");
       });
+
+    isNewUser &&
+      updateUserBackEnd(
+        newUser.uid,
+        newUser.displayName,
+        newUser.email,
+        idToken
+      );
   };
 
   //display name change
@@ -75,7 +83,12 @@ function SignIn() {
         const currentUser = firebase.auth().currentUser;
         setUser(currentUser);
 
-        updateUserBackEnd(currentUser.uid, newDisplayName, currentUser.email);
+        updateUserBackEnd(
+          currentUser.uid,
+          newDisplayName,
+          currentUser.email,
+          userIdToken
+        );
 
         setNewDisplayName(newDisplayName);
       } else {
@@ -124,7 +137,7 @@ function SignIn() {
     }
   };
 
-  const updateUserBackEnd = async (uid, newDisplayName, email) => {
+  const updateUserBackEnd = async (uid, newDisplayName, email, userIdToken) => {
     try {
       const response = await axios.patch(
         `${import.meta.env.VITE_BACKEND_URL}/users/${uid}`,
@@ -141,7 +154,8 @@ function SignIn() {
         }
       );
       if (response.status === 200 || response.status === 201) {
-        setSysMsg("Display name updated!");
+        setSysMsg("Profile Updated!");
+        navigate("/profile");
         return;
       }
       throw Error(error.response.data.error);
