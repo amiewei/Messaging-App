@@ -26,7 +26,7 @@ export const MessagingContextProvider = ({ children }) => {
   const addMessage = async (uid, message) => {
     try {
       return await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/users/api/message/add`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/message/add`,
         { uid, message, useridtoken: userIdToken }
       );
     } catch (error) {
@@ -37,7 +37,7 @@ export const MessagingContextProvider = ({ children }) => {
   const deleteAllMessagesByUser = async (uid) => {
     try {
       return await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/users/api/message/delete`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/message/delete`,
         {
           headers: {
             uid: uid,
@@ -54,7 +54,7 @@ export const MessagingContextProvider = ({ children }) => {
   const deleteIndividualMessage = async (messageId, uid) => {
     try {
       return await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/users/api/message/delete`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/users/message/delete`,
         {
           headers: {
             messageid: messageId,
