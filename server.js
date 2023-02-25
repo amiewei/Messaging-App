@@ -13,7 +13,7 @@ app.use((req, res, next) => {
   console.log(req.originalUrl);
   if (host === "messaging-app-ssr.onrender.com") {
     console.log("redirecting");
-    return res.redirect(301, "https://chirp.ddns.net/" + req.originalUrl);
+    return res.redirect(301, "https://chirp.ddns.net" + req.originalUrl);
   }
   return next();
 });
