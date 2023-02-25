@@ -11,12 +11,9 @@ app.use((req, res, next) => {
   console.log("redirect middleware");
   console.log(host);
   console.log(req.originalUrl);
-  if (host.includes("auth-client-ol1w.onrender.com")) {
+  if (host === "messaging-app-ssr.onrender.com") {
     console.log("redirecting");
-    return res.redirect(
-      301,
-      "https://https://chirp.ddns.net/" + req.originalUrl
-    );
+    return res.redirect(301, "https://chirp.ddns.net/");
   }
   return next();
 });
