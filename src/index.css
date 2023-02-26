@@ -6,6 +6,9 @@
     @apply rounded-md;
 }
 
+.spinner-slow {
+    animation-duration: 2s;
+}
 
 h1 {
     font-weight: 600;

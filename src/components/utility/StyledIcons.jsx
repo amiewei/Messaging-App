@@ -25,4 +25,31 @@ function DelMsgIcon({ onClick }) {
   );
 }
 
-export { DelMsgIcon };
+function Spinner() {
+  return (
+    <>
+      <button type="button" class="bg-transparent" disabled>
+        <svg
+          class="spinner-slow mr-3 h-20 w-20 animate-spin"
+          viewBox="0 0 40 40"
+        >
+          <circle
+            class="path stroke-indigo-500"
+            cx="20"
+            cy="20"
+            r="15"
+            fill="transparent"
+            stroke-width="6"
+            stroke-dasharray="89, 200"
+            stroke-dashoffset="0"
+          ></circle>
+        </svg>
+        <div class="flex items-center justify-center">
+          <span class="text-gray-500">Loading...</span>
+        </div>
+      </button>
+    </>
+  );
+}
+
+export { DelMsgIcon, Spinner };

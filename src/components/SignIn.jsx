@@ -101,7 +101,7 @@ function SignIn() {
 
   const handleAdminPasscode = async () => {
     try {
-      if (passcode === "admin") {
+      if (passcode === import.meta.env.VITE_ADMIN_PASSWORD) {
         updateUserToAdminBackEnd(passcode);
       } else {
         throw Error("Incorrect Passcode");
