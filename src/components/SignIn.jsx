@@ -119,11 +119,11 @@ function SignIn() {
         {
           isAdmin: true,
           displayName: user.displayName,
-          useridtoken: userIdToken,
         },
         {
           headers: {
             "Content-Type": "application/json",
+            Authorization: userIdToken,
           },
         }
       );
@@ -145,11 +145,10 @@ function SignIn() {
           displayName: newDisplayName,
           email: email,
           uid,
-          useridtoken: userIdToken,
         },
         {
           headers: {
-            "Content-Type": "application/json",
+            Authorization: userIdToken,
           },
         }
       );

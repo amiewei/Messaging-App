@@ -28,24 +28,24 @@ function DelMsgIcon({ onClick }) {
 function Spinner() {
   return (
     <>
-      <button type="button" class="bg-transparent" disabled>
+      <button type="button" className="bg-transparent" disabled>
         <svg
-          class="spinner-slow mr-3 h-20 w-20 animate-spin"
+          className="spinner-slow mr-3 h-20 w-20 animate-spin"
           viewBox="0 0 40 40"
         >
           <circle
-            class="path stroke-indigo-500"
+            className="path stroke-indigo-500"
             cx="20"
             cy="20"
             r="15"
             fill="transparent"
-            stroke-width="6"
-            stroke-dasharray="89, 200"
-            stroke-dashoffset="0"
+            strokeWidth="6"
+            strokeDasharray="89, 200"
+            strokeDashoffset="0"
           ></circle>
         </svg>
-        <div class="flex items-center justify-center">
-          <span class="text-gray-500">Loading...</span>
+        <div className="flex items-center justify-center">
+          <span className="text-gray-500">Loading...</span>
         </div>
       </button>
     </>

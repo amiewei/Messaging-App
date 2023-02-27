@@ -27,7 +27,15 @@ export const MessagingContextProvider = ({ children }) => {
     try {
       return await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/users/message/add`,
-        { uid, message, useridtoken: userIdToken }
+        {
+          message,
+          uid: uid,
+        },
+        {
+          headers: {
+            Authorization: userIdToken,
+          },
+        }
       );
     } catch (error) {
       return error.response;
@@ -36,13 +44,16 @@ export const MessagingContextProvider = ({ children }) => {
 
   const deleteAllMessagesByUser = async (uid) => {
     try {
+      //delete request body is formatted differently compared to post and patch
       return await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}/api/users/message/delete`,
         {
           headers: {
+            Authorization: userIdToken,
+          },
+          data: {
+            deletiontype: "all",
             uid: uid,
-            method: "all",
-            useridtoken: userIdToken,
           },
         }
       );
@@ -57,10 +68,12 @@ export const MessagingContextProvider = ({ children }) => {
         `${import.meta.env.VITE_BACKEND_URL}/api/users/message/delete`,
         {
           headers: {
-            messageid: messageId,
+            Authorization: userIdToken,
+          },
+          data: {
+            deletiontype: "individual",
             uid: uid,
-            method: "individual",
-            useridtoken: userIdToken,
+            messageid: messageId,
           },
         }
       );
