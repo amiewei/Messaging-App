@@ -1,6 +1,6 @@
 # Message Post App
 
-**live Demo @ [Render](https://auth-client-ol1w.onrender.com/)**
+**live Demo @ [Render](https://chirp.ddns.net/)**
 
 ## Stack:
 
